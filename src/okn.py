@@ -7,4 +7,4 @@ class Okn:
         self.date = date
 
     def __str__(self) -> str:
-        return f'{self.name}\n{self.order_link}\n'
+        return f'[{self.name}]({self.order_link})\n'

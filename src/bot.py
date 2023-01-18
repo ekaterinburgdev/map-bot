@@ -1,3 +1,4 @@
+from telegram.constants import ParseMode
 from telegram.ext import ContextTypes, Application
 import os
 from datetime import date
@@ -19,7 +20,7 @@ async def notify_about_okns(context: ContextTypes.DEFAULT_TYPE):
     except:
         message = 'Что-то пошло не так :('
     finally:
-        await context.bot.send_message(chat_id='-780151692', text=message)
+        await context.bot.send_message(chat_id='-780151692', text=message, parse_mode=ParseMode.MARKDOWN)
     
 
 application = Application.builder().token(TOKEN).build()
