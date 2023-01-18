@@ -1,0 +1,10 @@
+version: "3.9"
+
+services:
+    app:
+        container_name: app
+        image: ${IMAGE_APP}
+        build: .
+        env_file:
+          - .env
+        command: "pipenv run python3 src/bot.py"
