@@ -1,0 +1,25 @@
+name: remote ssh command
+on: 
+  push:
+    branches:
+      - main
+    paths-ignore:
+      - .gitignore
+      - README.md
+      - .github
+jobs:
+  deploy:
+    name: Build
+    runs-on: ubuntu-20.04
+    steps:
+    - name: deploy
+      uses: appleboy/ssh-action@v0.1.6
+      with:
+        host: ${{ secrets.HOST }}
+        username: ${{ secrets.USERNAME }}
+        key: ${{ secrets.KEY }}
+        script: |
+          cd /usr/local/map-bot
+          git pull
+          docker-compose down
+          docker-compose up --build
