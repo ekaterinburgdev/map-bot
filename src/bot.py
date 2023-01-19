@@ -9,6 +9,7 @@ from utils import get_orders_by_date
 load_dotenv()
 
 TOKEN = os.getenv('TOKEN')
+CHAT_ID = os.getenv('CHAT_ID')
 
 async def notify_about_okns(context: ContextTypes.DEFAULT_TYPE):
     try:
@@ -20,7 +21,7 @@ async def notify_about_okns(context: ContextTypes.DEFAULT_TYPE):
     except:
         message = 'Что-то пошло не так :('
     finally:
-        await context.bot.send_message(chat_id='-780151692', text=message, parse_mode=ParseMode.MARKDOWN)
+        await context.bot.send_message(chat_id=CHAT_ID, text=message, parse_mode=ParseMode.MARKDOWN)
     
 
 application = Application.builder().token(TOKEN).build()
