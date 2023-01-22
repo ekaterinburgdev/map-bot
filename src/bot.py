@@ -4,7 +4,7 @@ import os
 from datetime import date
 from dotenv import load_dotenv
 
-from utils import get_orders_by_date
+from utils import get_orders_by_date, url
 
 load_dotenv()
 
@@ -13,10 +13,11 @@ TOKEN = os.getenv('TOKEN')
 async def notify_about_okns(context: ContextTypes.DEFAULT_TYPE):
     try:
         orders = get_orders_by_date(date.today())
+        message = f'Я зашел на [этот]({url}) сайт, чтобы посмотреть обновления за сегодня\n\n'
         if len(orders) == 0:
-            message = 'Сегодня ничего не публиковали, посмотрю завтра :('
+            message += 'Сегодня ничего не публиковали, посмотрю завтра :('
         else:
-            message = 'Сегодня опубликовали такие приказы об ОКН:\n\n' + '\n'.join(map(str, orders))
+            message += 'Сегодня опубликовали такие приказы об ОКН:\n\n' + '\n'.join(map(str, orders))
     except:
         message = 'Что-то пошло не так :('
     finally:
