@@ -3,6 +3,7 @@ from telegram.ext import ContextTypes, Application
 import os
 from datetime import date
 from dotenv import load_dotenv
+import traceback
 
 from utils import get_orders_by_date, url
 
@@ -20,8 +21,8 @@ async def notify_about_okns(context: ContextTypes.DEFAULT_TYPE):
             message += 'Сегодня опубликовали такие приказы об ОКН:\n\n' + '\n'.join(map(str, orders))
     except:
         message = 'Что-то пошло не так :('
-    finally:
-        await context.bot.send_message(chat_id=os.getenv('CHAT_ID'), text=message, parse_mode=ParseMode.MARKDOWN)
+        traceback.print_exc()
+    await context.bot.send_message(chat_id=os.getenv('CHAT_ID'), text=message, parse_mode=ParseMode.MARKDOWN)
     
 
 application = Application.builder().token(TOKEN).build()
