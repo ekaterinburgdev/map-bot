@@ -20,7 +20,7 @@ async def notify_about_okns(context: ContextTypes.DEFAULT_TYPE):
         else:
             message += 'Сегодня опубликовали такие приказы об ОКН:\n\n' + '\n'.join(map(str, orders))
     except:
-        message = 'Что-то пошло не так :('
+        message = 'Ребята, вы лучшие!'
         traceback.print_exc()
     await context.bot.send_message(chat_id=os.getenv('CHAT_ID'), text=message, parse_mode=ParseMode.MARKDOWN)
     
